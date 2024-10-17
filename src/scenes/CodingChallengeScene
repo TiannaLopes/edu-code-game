@@ -1,0 +1,74 @@
+import Phaser from 'phaser';
+import { CodeInputField } from '../gameobjects/CodeInputField';  // Import CodeInputField
+
+export class CodingChallengeScene extends Phaser.Scene {
+  constructor() {
+    super('CodingChallengeScene');
+    // Declare feedbackText as a property of the scene (in the constructor)
+    this.feedbackText = null;
+  }
+
+  create() {
+    // Display the coding challenge instructions
+    this.add.text(100, 100, 'Coding Challenge: Write a function that returns the sum of two numbers.', {
+      fontSize: '24px',
+      color: '#ffffff'
+    });
+
+    // Add input field for user to type their code
+    const inputField = new CodeInputField(this, 100, 200, "function sum(a, b) { }");
+    this.add.existing(inputField);
+
+    // Submit button to check the player's code
+    const submitButton = this.add.text(100, 300, 'Submit', {
+      fontSize: '32px',
+      color: '#ffffff',
+      backgroundColor: '#0000ff',
+      padding: { x: 10, y: 10 }
+    }).setInteractive();
+
+    // When the player clicks the submit button, check their solution
+    submitButton.on('pointerdown', () => {
+      const userCode = inputField.getValue();
+      this.checkSolution(userCode);
+    });
+
+    // Initialize feedbackText (set initially as an empty text object)
+    this.feedbackText = this.add.text(100, 400, '', {
+      fontSize: '28px',
+      color: '#ff0000'
+    });
+  }
+
+  // Function to check the player's solution
+  checkSolution(userCode) {
+    // Define the correct solution
+    const correctSolution = 'function sum(a, b) { return a + b; }';
+
+    try {
+      // Attempt to evaluate the player's code safely using the Function constructor
+      const userFunction = new Function('return ' + userCode)();
+
+      // Test the player's function by calling it with some sample inputs
+      const result = userFunction(2, 3); // Expect 5
+      const isCorrect = result === 5 && userCode.trim() === correctSolution.trim();
+
+      // Provide feedback based on correctness
+      if (isCorrect) {
+        this.showFeedback('Correct! Well done!', true);
+      } else {
+        this.showFeedback('Incorrect. Try again!', false);
+      }
+    } catch (error) {
+      // Handle any errors in the player's code (e.g., syntax errors)
+      this.showFeedback('There was an error in your code. Please check it and try again.', false);
+    }
+  }
+
+  // Show feedback to the player
+  showFeedback(message, isCorrect) {
+    const color = isCorrect ? '#00ff00' : '#ff0000';  // Green for correct, red for incorrect
+    this.feedbackText.setText(message);
+    this.feedbackText.setColor(color);
+  }
+}

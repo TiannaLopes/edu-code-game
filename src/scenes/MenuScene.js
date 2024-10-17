@@ -10,7 +10,6 @@ export class MenuScene extends Scene {
     }
 
     create() {
-
         // Background rectangles
         this.add.rectangle(
             0,
@@ -27,27 +26,27 @@ export class MenuScene extends Scene {
             0x000000
         ).setAlpha(.8).setOrigin(0, 0.5);
 
-        // Logo
+        // Logo for Educational Coding Game
         const logo_game = this.add.bitmapText(
             this.scale.width / 2,
             this.scale.height / 2,
-            "knighthawks",
-            "PHASER'S\nREVENGE",
+            "knighthawks", // Use your preferred font or bitmap font
+            "EDUCATIONAL\nCODING GAME",
             52,
             1
         )
         logo_game.setOrigin(0.5, 0.5);
-        logo_game.postFX.addShine();
+        logo_game.postFX.addShine(); // Optional visual effect
 
+        // Instruction to start the game
         const start_msg = this.add.bitmapText(
             this.scale.width / 2,
             this.scale.height / 2 + 85,
-            "pixelfont",
-            "CLICK TO START",
+            "pixelfont", // Use your preferred font
+            "CLICK TO START CODING",
             24
         ).setOrigin(0.5, 0.5);
         
-
         // Tween to blink the text
         this.tweens.add({
             targets: start_msg,
@@ -58,9 +57,9 @@ export class MenuScene extends Scene {
             repeat: -1
         });
 
-        // Send start-game event when user clicks
+        // Send start-game event when user clicks to begin the coding challenges
         this.input.on("pointerdown", () => {
-            this.game.events.emit("start-game");
+            this.scene.start("MainScene"); // Go to MainScene or your desired scene
         });
     }
 }

@@ -1,10 +1,8 @@
 import { Game } from "phaser";
 import { Preloader } from "./preloader";
-import { GameOverScene } from "./scenes/GameOverScene";
-import { HudScene } from "./scenes/HudScene";
+import { CodingChallengeScene } from "./scenes/CodingChallengeScene";
 import { MainScene } from "./scenes/MainScene";
 import { MenuScene } from "./scenes/MenuScene";
-import { SplashScene } from "./scenes/SplashScene";
 
 // More information about config: https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
@@ -15,6 +13,9 @@ const config = {
     backgroundColor: "#1c172e",
     pixelArt: true,
     roundPixel: false,
+      dom: {
+    createContainer: true
+  },
     max: {
         width: 800,
         height: 600,
@@ -31,11 +32,9 @@ const config = {
     },
     scene: [
         Preloader,
-        SplashScene,
         MainScene,
         MenuScene,
-        HudScene,
-        GameOverScene
+        CodingChallengeScene,
     ]
 };
 
