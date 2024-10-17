@@ -1,8 +1,6 @@
-# Phaser's Revenge
+# edu-code-game
+Game that teaches coding concepts through puzzles and challenges. Players learn how to solve problems by writing code or dragging and dropping blocks..
 
-Phaser's Revenge is an adaptation of the classic game Space Invaders.
-
-Your mission is to shoot the enemy ship and dodge its attacks to score as many points as possible in a short amount of time.
 
 ## Instructions
 
@@ -14,11 +12,8 @@ Your mission is to shoot the enemy ship and dodge its attacks to score as many p
 
 ![screenshot](screenshot.png)
 
-
-# edu-code-game
-Game that teaches coding concepts through puzzles and challenges. Players learn how to solve problems by writing code or dragging and dropping blocks..
-
-
+# Using Phaser 
+https://phaser.io/tutorials/create-game-app
 
 # Contributing to Educational Coding Game
 
